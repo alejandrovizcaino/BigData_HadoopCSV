@@ -1,5 +1,4 @@
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,28 +25,26 @@ public class LluviasMapper
     String elmunicipio = "";
 
     @Override
-    public void map(LongWritable key, Text value, Context context)
-            throws IOException, InterruptedException {
-        
-        
-        Configuration c  = context.getConfiguration();
+    protected void setup(Context context) {
+
+        Configuration c = context.getConfiguration();
         String miruta = c.get("ruta");
         BufferedReader objReader = null;
-        String municipio="";
-        String valor ="";
+        String municipio = "";
+        String valor = "";
         ArrayList<String> municipios = new ArrayList();
         ArrayList<Double> valores = new ArrayList();
-        
+
         try {
             String str;
             objReader = new BufferedReader(new FileReader(miruta));
-            
+
             while ((str = objReader.readLine()) != null) {
-          
+
                 int ind1 = str.indexOf("\"");
-                int ind2 = str.indexOf("\"", str.indexOf("\"") + 1);      
-                municipio = str.substring(ind1+1, ind2);
-                valor = str.substring(ind2+1, str.length());
+                int ind2 = str.indexOf("\"", str.indexOf("\"") + 1);
+                municipio = str.substring(ind1 + 1, ind2);
+                valor = str.substring(ind2 + 1, str.length());
                 valor = valor.trim();
                 municipios.add(municipio);
                 valores.add(Double.parseDouble(valor));
@@ -66,15 +63,20 @@ public class LluviasMapper
                 ex.printStackTrace();
             }
         }
-        
+
         Double max = -1.0;
-        for (int j=0; j < municipios.size(); j++){
-            if (valores.get(j)>max){
+        for (int j = 0; j < municipios.size(); j++) {
+            if (valores.get(j) > max) {
                 max = valores.get(j);
                 municipio = municipios.get(j);
             }
         }
         elmunicipio = municipio;
+    }
+
+    @Override
+    public void map(LongWritable key, Text value, Context context)
+            throws IOException, InterruptedException {
 
         try {
             if (key.get() == 0) {
