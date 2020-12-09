@@ -17,3 +17,5 @@ La configuración empleada básica será la del tipo standalone.
 
 El conjunto de datos se encuentra disponible en formato CSV para descargar desde la siguiente dirección:
 http://www.juntadeandalucia.es/datosabiertos/portal/catalogo/detalle/49903.html
+
+De todos estos datos, utilizaremos para nuestro estudio el de la radicación solar media de cada día, despreciando el resto de la información, salvo la del municipio, es decir, nuestro interés está en escoger entre las siguientes opciones solamente: Almonte (Subestación 10), Lepe (2), Gibraleón (3), Moguer (4), Niebla (5), Aroche (6), Puebla de Guzman (7), El Campillo (8) o La Palma del Condado (9).
